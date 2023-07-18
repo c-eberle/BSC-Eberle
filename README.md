@@ -1,4 +1,29 @@
 # BSC-Eberle
+########################################################################
+
+Abstract:
+
+The aim of this bachelor thesis is the implementation of an observer model which
+is able to predict the goal-directed behaviour of an agent in a fully observable
+environment. For this purpose, a method was developed for generating trajecto-
+ry data in which an agent moves in a two-dimensional gridworld on the shortest
+possible path to its goal object. The task of the observer model is to predict the
+next step of the agent in each given grid world state. A variation of the “Long
+Short-Term Memory“ architecture (LSTM), the “Convolutional LSTM“ architec-
+ture (ConvLSTM), was used as the underlying architecture of the observer model.
+This architecture offers the advantage that the input does not have to be reduced
+to a one-dimensional vector and that spatial information is retained. Therefore, the
+trajectories can be processed efficiently since they are sequences of two-dimensional
+data. In order to evaluate the performance of the ConvLSTM-based observer model
+in the gridworld task, different model parameters were tested and compared. Al-
+most all tested models were able to qualitatively reflect the behaviour of the agent
+with their predictions. The effectiveness of the ConvLSTM architecture in the grid
+world task was thus successfully demonstrated.
+
+########################################################################
+
+
+
 
 Erstellen eines auf ConvLSTM basierenden Beobachter-Modells um die Bewegung eines Agenten in einer 9x9 Gridworld vorherzusagen. 
 Idee und der Großteil des bestehenden Codes kommt aus dem Teamprojekt.
