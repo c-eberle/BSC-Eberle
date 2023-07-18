@@ -22,8 +22,7 @@ world task was thus successfully demonstrated.
 
 
 
-Erstellen eines auf ConvLSTM basierenden Beobachter-Modells um die Bewegung eines Agenten in einer 9x9 Gridworld vorherzusagen. 
-Idee und der Großteil des bestehenden Codes kommt aus dem Teamprojekt.
+Erstellen eines auf ConvLSTM basierenden Beobachter-Modells um die Bewegung eines Agenten in einer 9x9 Gridworld vorherzusagen.
 
 
 Kurze Beschreibung der einzelnen Dateien:
