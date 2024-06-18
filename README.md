@@ -1,57 +1,65 @@
 # BSC-Eberle
-########################################################################
 
-Abstract:
+---
 
-The aim of this bachelor thesis is the implementation of an observer model which
-is able to predict the goal-directed behaviour of an agent in a fully observable
-environment. For this purpose, a method was developed for generating trajectory data in which an agent moves in a two-dimensional gridworld on the shortest
-possible path to its goal object. The task of the observer model is to predict the
-next step of the agent in each given grid world state. A variation of the “Long
-Short-Term Memory“ architecture (LSTM), the “Convolutional LSTM“ architecture (ConvLSTM), was used as the underlying architecture of the observer model.
-This architecture offers the advantage that the input does not have to be reduced
-to a one-dimensional vector and that spatial information is retained. Therefore, the
-trajectories can be processed efficiently since they are sequences of two-dimensional
-data. In order to evaluate the performance of the ConvLSTM-based observer model
-in the gridworld task, different model parameters were tested and compared. Almost all tested models were able to qualitatively reflect the behaviour of the agent
-with their predictions. The effectiveness of the ConvLSTM architecture in the grid
-world task was thus successfully demonstrated.
+## Zusammenfassung
 
-########################################################################
+Diese Bachelorarbeit befasst sich mit der Implementierung eines Beobachtermodells, das in der Lage ist, das zielgerichtete Verhalten eines Agenten in einer vollständig beobachtbaren Umgebung vorherzusagen. Hierfür wurde eine Methode zur Generierung von Trajektoriendaten entwickelt, bei der sich ein Agent in einer zweidimensionalen Gridworld auf dem kürzesten Pfad zu seinem Zielobjekt bewegt. Die Aufgabe des Beobachtermodells besteht darin, den nächsten Schritt des Agenten in einem gegebenen Gridworld-Zustand vorherzusagen.
 
+Als zugrundeliegende Architektur des Beobachtermodells wurde eine Variante der „Long Short-Term Memory“-Architektur (LSTM), die „Convolutional LSTM“-Architektur (ConvLSTM), verwendet. Diese Architektur hat den Vorteil, dass der Input nicht auf einen eindimensionalen Vektor reduziert werden muss und räumliche Informationen erhalten bleiben. Somit können die Trajektorien effizient verarbeitet werden, da sie Sequenzen zweidimensionaler Daten sind. Zur Bewertung der Leistung des ConvLSTM-basierten Beobachtermodells in der Gridworld-Aufgabe wurden verschiedene Modellparameter getestet und verglichen. Fast alle getesteten Modelle konnten das Verhalten des Agenten qualitativ gut widerspiegeln, womit die Effektivität der ConvLSTM-Architektur in der Gridworld-Aufgabe erfolgreich nachgewiesen wurde.
 
+---
 
+## Projektübersicht
 
-Erstellen eines auf ConvLSTM basierenden Beobachter-Modells um die Bewegung eines Agenten in einer 9x9 Gridworld vorherzusagen.
+Dieses Projekt implementiert ein auf ConvLSTM basierendes Beobachter-Modell, um die Bewegung eines Agenten in einer 9x9 Gridworld vorherzusagen.
 
+### Verzeichnisstruktur
 
-Kurze Beschreibung der einzelnen Dateien:
+- **`convlstm`**:
+  - Implementiert das ConvLSTM-Modell, basierend auf dem Code aus dem [ndrplz-Repository](https://github.com/ndrplz/ConvLSTM_pytorch).
+  - Modifikation: Hinzufügen eines Fully-Connected Layers, um den Output in die gewünschten Dimensionen zu bringen.
 
-convlstm:
-Klasse für das ConvLSTM-Modell, basiert auf dem Code aus dem Repository von ndrplz (https://github.com/ndrplz/ConvLSTM_pytorch). 
-Wurde bisher nur minimal modifiziert, indem ein Fully-Connected Layer hinzugefügt wurde um den Output in die gewünschten Dimensionen zu kriegen.
+- **`convlstm_maxp`**:
+  - Implementiert ein ConvLSTM-Modell mit zusätzlichem MaxPooling-Layer (zwischen letztem ConvLSTM-Layer und erstem Fully-Connected Layer).
+  - Hinweis: Um dieses Modell zu verwenden, in `model_training.py` in Zeile 9 `import convlstm` zu `import convlstm_maxp as convlstm` ändern.
 
-convlstm_maxp:
-Klasse für ein ConvLSTM mit zusätzlichem maxpooling-Layer (zwischen letztem ConvLSTM-Layer und erstem Fully-Connected Layer).
-Falls ein Modell mit maxpooling verwendet werden soll dann einfach in model_training.py Zeile 9 ändern von "import convlstm" zu "import convlstm_maxp as convlstm".
+- **`datengenerierung`**:
+  - Generiert Trajektorien eines Agenten in einer 9x9-Gridworld. Die Daten werden in Trainings- und Teacher-Daten aufgeteilt und im txt-Format gespeichert.
 
-datengenerierung:
-Erstellt Trajektorien eines Agenten in einer 9x9-Gridworld. Die Daten werden in Trainings- und Teacher-Daten aufgeteilt und im txt-Format gespeichert.
+- **`model_training`**:
+  - Hauptskript zum Einlesen der Daten, Initialisieren und Trainieren des Modells.
 
-model_training:
-Hier kommt alles zusammen. Die Daten werden eingelesen und das Modell wird initialisiert und trainiert.
+- **`progress`**:
+  - Klasse zur Anzeige des Lernfortschritts in der Konsole.
 
-progress:
-Klasse für eine Anzeige des Lernfortschritts in der Konsole.
+- **`visualization`**:
+  - Skript zur Visualisierung und Kontrolle der Daten.
+  - Hinweis: Größere Datensätze zu visualisieren dauert länger. Ein kleiner optischer Fehler im letzten Schritt jeder Trajektorie ist noch vorhanden (Todo).
 
-visualization:
-Zur Kontrolle der Daten kann man diese hier einlesen und visualisieren lassen. 
-Größere Datensätze zu visualisieren braucht allerdings ewig. Außerdem ist noch ein kleiner optischer Fehler im letzten Schritt jeder Trajektorie (Todo).
+- **`plot_results`**:
+  - Erzeugt Plots der verschiedenen Genauigkeiten und Verluste (Training, Validierung und Testen) mit Matplotlib.
 
-plot_results:
-Erstellt mit Matplotlib Plots von den verschiedenen Accuracies und Losses (training, validation und testing).
+### Verwendungshinweise
 
+- Stellen Sie sicher, dass sich die Dateien `convlstm`, `model_training` und `progress` im gleichen Ordner befinden.
+- Passen Sie in `model_training` die globalen Variablen so an, dass der Pfad zu den Dateien für das Training und Testen des Modells korrekt angegeben ist.
 
-Anmerkungen zur Verwendung:
-- Die Dateien convlstm, model_training und progress sollten im gleichen Ordner sein.
-- Bei den globalen Variablen in model_training muss der Pfad zu Dateien für das Training und Testen des Modells spezifiziert werden.
+---
+
+## Lizenz
+
+Dieses Projekt ist unter der MIT-Lizenz lizenziert – siehe die [LICENSE](LICENSE) Datei für Details.
+
+---
+
+## Kontakt
+
+Falls Sie Fragen haben, können Sie sich gerne an mich wenden: [Ihr Name] (Ihr Kontakt).
+
+---
+
+## Acknowledgments
+
+- Dank an das [ndrplz-Repository](https://github.com/ndrplz/ConvLSTM_pytorch) für die Basis des ConvLSTM-Codes.
+
