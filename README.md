@@ -45,17 +45,6 @@ Dieses Projekt implementiert ein auf ConvLSTM basierendes Beobachter-Modell, um 
 - Stellen Sie sicher, dass sich die Dateien `convlstm`, `model_training` und `progress` im gleichen Ordner befinden.
 - Passen Sie in `model_training` die globalen Variablen so an, dass der Pfad zu den Dateien für das Training und Testen des Modells korrekt angegeben ist.
 
----
-
-## Lizenz
-
-Dieses Projekt ist unter der MIT-Lizenz lizenziert – siehe die [LICENSE](LICENSE) Datei für Details.
-
----
-
-## Kontakt
-
-Falls Sie Fragen haben, können Sie sich gerne an mich wenden: [Ihr Name] (Ihr Kontakt).
 
 ---
 
